@@ -1,0 +1,20 @@
+type User {
+  id: Int!
+  username: String!
+  role: UserRole!
+}
+
+input CreateUserInput {
+  username: String!
+  role: UserRole!
+}
+
+input UpdateUserInput {
+  id: Int!
+}
+
+type Mutation {
+  createUser(createUserInput: CreateUserInput!): User!
+  updateUser(updateUserInput: UpdateUserInput!): User!
+  removeUser(id: Int!): User
+}

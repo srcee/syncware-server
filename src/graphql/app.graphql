@@ -1,3 +1,8 @@
 type Query {
   hello: String!
 }
+
+enum UserRole {
+  SuperAdmin
+  Admin
+}
