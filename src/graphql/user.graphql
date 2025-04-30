@@ -1,0 +1,9 @@
+type User {
+  role: UserRole!
+  username: String!
+}
+
+enum UserRole {
+  SuperAdmin
+  Admin
+}
