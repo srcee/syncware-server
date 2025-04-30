@@ -1,3 +1,4 @@
+
 /*
  * -------------------------------------------------------
  * THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
@@ -8,13 +9,17 @@
 /* eslint-disable */
 
 export enum UserRole {
-  SuperAdmin = 'SuperAdmin',
-  Admin = 'Admin',
+    SuperAdmin = "SuperAdmin",
+    Admin = "Admin"
+}
+
+export interface IQuery {
+    hello(): string | Promise<string>;
 }
 
 export interface User {
-  role: UserRole;
-  username: string;
+    role: UserRole;
+    username: string;
 }
 
 type Nullable<T> = T | null;
