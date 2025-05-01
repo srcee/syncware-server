@@ -1,0 +1,43 @@
+type Order {
+  id: Int
+  table: RestaurantTable
+  waiter: User
+  items: [OrderItem]
+  status: OrderStatus
+  createdAt: Date
+}
+
+enum OrderStatus {
+  Pending
+  Confirmed
+  InProgress
+  Completed
+  Cancelled
+}
+
+input CreateOrderInput {
+  tableId: Int!
+  userId: Int!
+  status: OrderStatus!
+  createdAt: Date!
+  itemIds: [Int]
+}
+
+input UpdateOrderInput {
+  id: Int!
+  tableId: Int
+  userId: Int
+  status: OrderStatus
+  createdAt: Date
+  itemIds: [Int]
+}
+
+type Query {
+  order(id: Int!): Order
+}
+
+type Mutation {
+  createOrder(createOrderInput: CreateOrderInput!): Order!
+  updateOrder(updateOrderInput: UpdateOrderInput!): Order!
+  deleteOrder(id: Int!): Order
+}

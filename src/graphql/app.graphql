@@ -1,6 +1,4 @@
-type Query {
-  hello: String!
-}
+scalar Date
 
 enum UserRole {
   SuperAdmin

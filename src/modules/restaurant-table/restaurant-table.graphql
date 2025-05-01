@@ -1,0 +1,42 @@
+type RestaurantTable {
+  id: Int
+  tableName: String
+  seats: Int
+  status: RestaurantTableStatus
+  restaurant: Restaurant
+}
+
+enum RestaurantTableStatus {
+  Available
+  Occupied
+  Reserved
+}
+
+input CreateRestaurantTableInput {
+  tableName: String
+  seats: Int
+  status: RestaurantTableStatus
+  restaurantId: Int
+}
+
+input UpdateRestaurantTableInput {
+  id: Int!
+  tableName: String
+  seats: Int
+  status: RestaurantTableStatus
+  restaurantId: Int
+}
+
+type Query {
+  restaurantTable(id: Int!): RestaurantTable
+}
+
+type Mutation {
+  createRestaurantTable(
+    createRestaurantTableInput: CreateRestaurantTableInput!
+  ): RestaurantTable!
+  updateRestaurantTable(
+    updateRestaurantTableInput: UpdateRestaurantTableInput!
+  ): RestaurantTable!
+  removeRestaurantTable(id: Int!): RestaurantTable
+}

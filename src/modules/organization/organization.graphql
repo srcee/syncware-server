@@ -1,0 +1,31 @@
+type Organization {
+  id: Int
+  name: String
+  restaurants: [Restaurant]
+  isActive: Boolean
+}
+
+input CreateOrganizationInput {
+  name: String!
+  restaurantIds: [Int]
+}
+
+input UpdateOrganizationInput {
+  name: String
+  isActive: Boolean
+  restaurantIds: [Int]
+}
+
+type Query {
+  organization(id: Int!): Organization
+}
+
+type Mutation {
+  createOrganization(
+    createOrganizationInput: CreateOrganizationInput!
+  ): Organization!
+  updateOrganization(
+    updateOrganizationInput: UpdateOrganizationInput!
+  ): Organization!
+  deleteOrganization(id: Int!): Organization
+}

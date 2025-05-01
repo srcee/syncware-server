@@ -1,0 +1,35 @@
+type Restaurant {
+  id: Int
+  name: String
+  location: String
+  organization: Organization
+  users: [User]
+  tables: [RestaurantTable]
+}
+
+input CreateRestaurantInput {
+  organizationId: Int!
+  name: String!
+  location: String
+  tableIds: [Int]
+  userIds: [Int]
+}
+
+input UpdateRestaurantInput {
+  id: Int!
+  organizationId: Int
+  name: String
+  location: String
+  tableIds: [Int]
+  userIds: [Int]
+}
+
+type Query {
+  restaurant(id: Int!): Restaurant
+}
+
+type Mutation {
+  createRestaurant(createRestaurantInput: CreateRestaurantInput!): Restaurant!
+  updateRestaurant(updateRestaurantInput: UpdateRestaurantInput!): Restaurant!
+  deleteRestaurant(id: Int!): Restaurant
+}
