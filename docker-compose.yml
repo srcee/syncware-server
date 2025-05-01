@@ -7,13 +7,13 @@ services:
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: mydb
+      POSTGRES_DB: devdb
     ports:
       - '5432:5432'
     volumes:
       - pgdata:/var/lib/postgresql/data
 
-  syncware-server:
+  app:
     build: .
     depends_on:
       - postgres
@@ -25,7 +25,9 @@ services:
       POSTGRES_DB: devdb
     ports:
       - '3000:3000'
-    command: npm run start:dev
+    volumes:
+      - .:/app
+    command: ['sh', 'init-db.sh']
 
 volumes:
   pgdata:

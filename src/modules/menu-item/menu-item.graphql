@@ -1,0 +1,43 @@
+type MenuItem {
+  id: Int
+  name: String
+  description: String
+  price: Float
+  categoryId: Int
+  isAvailable: Boolean
+  preparationArea: MenuItemPreparationArea
+}
+
+enum MenuItemPreparationArea {
+  Bar
+  Kitchen
+}
+
+input CreateMenuItemInput {
+  name: String!
+  description: String
+  price: Float!
+  categoryId: Int!
+  isAvailable: Boolean!
+  preparationArea: MenuItemPreparationArea!
+}
+
+input UpdateMenuItemInput {
+  id: Int!
+  name: String
+  description: String
+  price: Float
+  categoryId: Int
+  isAvailable: Boolean
+  preparationArea: String
+}
+
+type Query {
+  menuItem(id: Int!): MenuItem
+}
+
+type Mutation {
+  createMenuItem(createMenuItemInput: CreateMenuItemInput!): MenuItem!
+  updateMenuItem(updateMenuItemInput: UpdateMenuItemInput!): MenuItem!
+  deleteMenuItem(id: Int!): MenuItem
+}

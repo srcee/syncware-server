@@ -1,0 +1,31 @@
+type MenuCategory {
+  id: Int!
+  name: String!
+  items: [MenuItem]
+  restaurant: Restaurant
+}
+
+input CreateMenuCategoryInput {
+  name: String!
+  restaurantId: Int!
+}
+
+input UpdateMenuCategoryInput {
+  id: Int!
+  name: String
+  restaurantId: Int
+}
+
+type Query {
+  menuCategory(id: Int!): MenuCategory
+}
+
+type Mutation {
+  createMenuCategory(
+    createMenuCategoryInput: CreateMenuCategoryInput!
+  ): MenuCategory!
+  updateMenuCategory(
+    updateMenuCategoryInput: UpdateMenuCategoryInput!
+  ): MenuCategory!
+  deleteMenuCategory(id: Int!): Boolean
+}

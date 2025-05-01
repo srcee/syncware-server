@@ -1,0 +1,43 @@
+type OrderItem {
+  id: Int
+  order: Order
+  menuItem: MenuItem
+  quantity: Int
+  notes: String
+  status: OrderItemStatus
+}
+
+enum OrderItemStatus {
+  Queued
+  Preparing
+  Ready
+  Delivered
+  Cancelled
+}
+
+input CreateOrderItemInput {
+  orderId: Int!
+  menuItemId: Int!
+  quantity: Int!
+  notes: String
+  status: OrderItemStatus
+}
+
+input UpdateOrderItemInput {
+  id: Int!
+  orderId: Int
+  menuItem: Int
+  quantity: Int
+  notes: String
+  status: OrderItemStatus
+}
+
+type Query {
+  orderItem(id: Int!): OrderItem
+}
+
+type Mutation {
+  createOrderItem(createOrderItemInput: CreateOrderItemInput!): OrderItem!
+  updateOrderItem(updateOrderItemInput: UpdateOrderItemInput!): OrderItem!
+  deleteOrderItem(id: Int!): OrderItem
+}
