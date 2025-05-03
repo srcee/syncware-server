@@ -14,6 +14,7 @@ import { OrderModule } from './modules/order/order.module';
 import { OrderItemModule } from './modules/order-item/order-item.module';
 import { MenuItemModule } from './modules/menu-item/menu-item.module';
 import { MenuCategoryModule } from './modules/menu-category/menu-category.module';
+import { PasswordModule } from './password/password.module';
 import * as dotenv from 'dotenv';
 dotenv.config();
 
@@ -53,6 +54,7 @@ dotenv.config();
     OrderItemModule,
     MenuItemModule,
     MenuCategoryModule,
+    PasswordModule,
   ],
   controllers: [AppController],
   providers: [
