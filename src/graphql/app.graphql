@@ -1,6 +1,9 @@
 scalar Date
 
 enum UserRole {
-  SuperAdmin
-  Admin
+  admin
+  manager
+  waiter
+  chef
+  bartender
 }

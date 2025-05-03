@@ -9,8 +9,11 @@
 /* eslint-disable */
 
 export enum UserRole {
-    SuperAdmin = "SuperAdmin",
-    Admin = "Admin"
+    admin = "admin",
+    manager = "manager",
+    waiter = "waiter",
+    chef = "chef",
+    bartender = "bartender"
 }
 
 export enum MenuItemPreparationArea {
