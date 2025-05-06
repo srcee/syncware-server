@@ -4,7 +4,7 @@ import { Repository } from 'typeorm';
 import { User } from './entities/user.entity';
 import { UpdateUserInput } from './dto/update-user.input';
 import { CreateUserInput } from './dto/create-user.input';
-import { PasswordService } from 'src/password/password.service';
+import { PasswordService } from 'src/modules/password/password.service';
 
 @Injectable()
 export class UserService {
@@ -16,6 +16,10 @@ export class UserService {
 
   async findOne(id: number): Promise<User | null> {
     return this.userRepository.findOne({ where: { id } });
+  }
+
+  async findOneByUserName(username: string): Promise<User | null> {
+    return this.userRepository.findOne({ where: { username } });
   }
 
   async create(input: CreateUserInput): Promise<User> {

@@ -14,16 +14,33 @@ import { OrderModule } from './modules/order/order.module';
 import { OrderItemModule } from './modules/order-item/order-item.module';
 import { MenuItemModule } from './modules/menu-item/menu-item.module';
 import { MenuCategoryModule } from './modules/menu-category/menu-category.module';
-import { PasswordModule } from './password/password.module';
-import * as dotenv from 'dotenv';
-dotenv.config();
+import { PasswordModule } from './modules/password/password.module';
+import { AuthModule } from './modules/auth/auth.module';
+import * as Joi from 'joi';
+
+const validationSchema = Joi.object({
+  JWT_SECRET: Joi.string().min(9).required(),
+  JWT_EXPIRES_IN: Joi.string().required(),
+  HASH_ROUNDS: Joi.number().default(10),
+  POSTGRES_HOST: Joi.string().required(),
+  POSTGRES_PORT: Joi.number().default(5432),
+  POSTGRES_USER: Joi.string().required(),
+  POSTGRES_PASSWORD: Joi.string().required(),
+  POSTGRES_DB: Joi.string().required(),
+});
 
 @Module({
   imports: [
+    ConfigModule.forRoot({
+      isGlobal: true,
+      envFilePath: '.env',
+      validationSchema,
+    }),
     // Infrastructure Modules
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       typePaths: ['./src/**/*.graphql'],
+      context: ({ req }: { req: Request }) => ({ req }),
       definitions: {
         path: join(process.cwd(), 'src/graphql/graphql.ts'),
       },
@@ -55,6 +72,7 @@ dotenv.config();
     MenuItemModule,
     MenuCategoryModule,
     PasswordModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [

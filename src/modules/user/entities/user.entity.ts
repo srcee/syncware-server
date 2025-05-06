@@ -26,7 +26,7 @@ export class User {
 
   @Field()
   @Column()
-  name: string;
+  username: string;
 
   @Field(() => UserRole)
   @Column({ type: 'enum', enum: UserRole })
