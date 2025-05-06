@@ -43,6 +43,11 @@ export enum RestaurantTableStatus {
     Reserved = "Reserved"
 }
 
+export interface LoginInput {
+    username: string;
+    password: string;
+}
+
 export interface CreateMenuCategoryInput {
     name: string;
     restaurantId: number;
@@ -152,8 +157,8 @@ export interface UpdateRestaurantInput {
 
 export interface CreateUserInput {
     email?: Nullable<string>;
+    username?: Nullable<string>;
     password?: Nullable<string>;
-    name?: Nullable<string>;
     role?: Nullable<UserRole>;
     restaurantId?: Nullable<number>;
 }
@@ -161,20 +166,18 @@ export interface CreateUserInput {
 export interface UpdateUserInput {
     id: number;
     email?: Nullable<string>;
+    username?: Nullable<string>;
     password?: Nullable<string>;
-    name?: Nullable<string>;
     role?: Nullable<UserRole>;
     restaurantId?: Nullable<number>;
 }
 
-export interface MenuCategory {
-    id: number;
-    name: string;
-    items?: Nullable<Nullable<MenuItem>[]>;
-    restaurant?: Nullable<Restaurant>;
+export interface UserAuth {
+    access_token: string;
 }
 
 export interface IQuery {
+    login(): UserAuth | Promise<UserAuth>;
     menuCategory(id: number): Nullable<MenuCategory> | Promise<Nullable<MenuCategory>>;
     menuItem(id: number): Nullable<MenuItem> | Promise<Nullable<MenuItem>>;
     orderItem(id: number): Nullable<OrderItem> | Promise<Nullable<OrderItem>>;
@@ -186,6 +189,7 @@ export interface IQuery {
 }
 
 export interface IMutation {
+    login(input: LoginInput): UserAuth | Promise<UserAuth>;
     createMenuCategory(createMenuCategoryInput: CreateMenuCategoryInput): MenuCategory | Promise<MenuCategory>;
     updateMenuCategory(updateMenuCategoryInput: UpdateMenuCategoryInput): MenuCategory | Promise<MenuCategory>;
     deleteMenuCategory(id: number): Nullable<boolean> | Promise<Nullable<boolean>>;
@@ -210,6 +214,13 @@ export interface IMutation {
     createUser(createUserInput: CreateUserInput): User | Promise<User>;
     updateUser(updateUserInput: UpdateUserInput): User | Promise<User>;
     deleteUser(id: number): Nullable<User> | Promise<Nullable<User>>;
+}
+
+export interface MenuCategory {
+    id: number;
+    name: string;
+    items?: Nullable<Nullable<MenuItem>[]>;
+    restaurant?: Nullable<Restaurant>;
 }
 
 export interface MenuItem {
@@ -267,7 +278,7 @@ export interface Restaurant {
 export interface User {
     id?: Nullable<number>;
     email?: Nullable<string>;
-    name?: Nullable<string>;
+    username?: Nullable<string>;
     role?: Nullable<UserRole>;
     restaurant?: Nullable<Restaurant>;
 }

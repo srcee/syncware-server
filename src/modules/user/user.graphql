@@ -1,15 +1,15 @@
 type User {
   id: Int
   email: String
-  name: String
+  username: String
   role: UserRole
   restaurant: Restaurant
 }
 
 input CreateUserInput {
   email: String
+  username: String
   password: String
-  name: String
   role: UserRole
   restaurantId: Int
 }
@@ -17,8 +17,8 @@ input CreateUserInput {
 input UpdateUserInput {
   id: Int!
   email: String
+  username: String
   password: String
-  name: String
   role: UserRole
   restaurantId: Int
 }

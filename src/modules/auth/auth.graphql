@@ -1,0 +1,16 @@
+type UserAuth {
+  access_token: String!
+}
+
+input LoginInput {
+  username: String!
+  password: String!
+}
+
+type Query {
+  login: UserAuth!
+}
+
+type Mutation {
+  login(input: LoginInput!): UserAuth!
+}
