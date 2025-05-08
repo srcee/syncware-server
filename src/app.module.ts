@@ -2,8 +2,6 @@ import { join } from 'path';
 import { Module } from '@nestjs/common';
 import { GraphQLISODateTime, GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserModule } from './modules/user/user.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
@@ -17,6 +15,7 @@ import { MenuCategoryModule } from './modules/menu-category/menu-category.module
 import { PasswordModule } from './modules/password/password.module';
 import { AuthModule } from './modules/auth/auth.module';
 import * as Joi from 'joi';
+import { CoreModule } from './core/core.module';
 
 const validationSchema = Joi.object({
   JWT_SECRET: Joi.string().min(9).required(),
@@ -62,7 +61,7 @@ const validationSchema = Joi.object({
       }),
       inject: [ConfigService],
     }),
-    // Bussiness Logic Modules
+    // Business Logic Modules
     UserModule,
     OrganizationModule,
     RestaurantModule,
@@ -74,9 +73,8 @@ const validationSchema = Joi.object({
     PasswordModule,
     AuthModule,
   ],
-  controllers: [AppController],
   providers: [
-    AppService,
+    CoreModule,
     {
       provide: 'Date',
       useValue: GraphQLISODateTime,
