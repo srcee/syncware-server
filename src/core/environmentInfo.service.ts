@@ -1,4 +1,6 @@
 import { Injectable } from '@nestjs/common';
+import * as dotenv from 'dotenv';
+dotenv.config();
 
 export enum Environment {
   Development = 'dev',

@@ -30,6 +30,7 @@ const validationSchema = Joi.object({
 
 @Module({
   imports: [
+    CoreModule,
     ConfigModule.forRoot({
       isGlobal: true,
       envFilePath: '.env',
@@ -74,7 +75,6 @@ const validationSchema = Joi.object({
     AuthModule,
   ],
   providers: [
-    CoreModule,
     {
       provide: 'Date',
       useValue: GraphQLISODateTime,
