@@ -44,7 +44,7 @@ export class RestaurantTableService {
       throw new Error('RestaurantTable does not exist');
     }
 
-    Object.assign(restaurantTable, { isActive: false });
+    Object.assign(restaurantTable, { archived: false });
 
     await this.restaurantTableRepository.save(restaurantTable);
 

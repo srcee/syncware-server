@@ -5,6 +5,11 @@ type OrderItem {
   quantity: Int
   notes: String
   status: OrderItemStatus
+  archived: Boolean
+  createdAt: Date
+  updatedAt: Date
+  createdBy: User
+  updatedBy: User
 }
 
 enum OrderItemStatus {

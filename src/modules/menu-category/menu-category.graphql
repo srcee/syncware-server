@@ -3,6 +3,11 @@ type MenuCategory {
   name: String!
   items: [MenuItem]
   restaurant: Restaurant
+  archived: Boolean
+  createdAt: Date
+  updatedAt: Date
+  createdBy: User
+  updatedBy: User
 }
 
 input CreateMenuCategoryInput {

@@ -1,6 +1,7 @@
-import { Field, ID, ObjectType } from '@nestjs/graphql';
+import { Field, ObjectType } from '@nestjs/graphql';
+import { BaseEntity } from 'src/common/entities/base.entity';
 import { Restaurant } from 'src/modules/restaurant/entities/restaurant.entity';
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, ManyToOne } from 'typeorm';
 
 export enum UserRole {
   Admin = 'admin',
@@ -12,11 +13,7 @@ export enum UserRole {
 
 @ObjectType()
 @Entity()
-export class User {
-  @Field(() => ID)
-  @PrimaryGeneratedColumn()
-  id: number;
-
+export class User extends BaseEntity {
   @Field()
   @Column({ unique: true })
   email: string;

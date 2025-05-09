@@ -1,15 +1,12 @@
-import { Field, ID, ObjectType } from '@nestjs/graphql';
+import { Field, ObjectType } from '@nestjs/graphql';
+import { BaseEntity } from 'src/common/entities/base.entity';
 import { MenuItemPreparationArea } from 'src/graphql/graphql';
 import { MenuCategory } from 'src/modules/menu-category/entities/menu-category.entity';
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, ManyToOne } from 'typeorm';
 
 @ObjectType()
 @Entity()
-export class MenuItem {
-  @Field(() => ID)
-  @PrimaryGeneratedColumn()
-  id: number;
-
+export class MenuItem extends BaseEntity {
   @Field()
   @Column()
   name: string;

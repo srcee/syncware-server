@@ -2,7 +2,11 @@ type Organization {
   id: Int
   name: String
   restaurants: [Restaurant]
-  isActive: Boolean
+  archived: Boolean
+  createdAt: Date
+  updatedAt: Date
+  createdBy: User
+  updatedBy: User
 }
 
 input CreateOrganizationInput {
@@ -12,7 +16,6 @@ input CreateOrganizationInput {
 
 input UpdateOrganizationInput {
   name: String
-  isActive: Boolean
   restaurantIds: [Int]
 }
 

@@ -6,6 +6,11 @@ type MenuItem {
   categoryId: Int
   isAvailable: Boolean
   preparationArea: MenuItemPreparationArea
+  archived: Boolean
+  createdAt: Date
+  updatedAt: Date
+  createdBy: User
+  updatedBy: User
 }
 
 enum MenuItemPreparationArea {

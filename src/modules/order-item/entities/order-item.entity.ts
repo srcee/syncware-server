@@ -1,7 +1,8 @@
-import { Field, ID, ObjectType } from '@nestjs/graphql';
+import { Field, ObjectType } from '@nestjs/graphql';
+import { BaseEntity } from 'src/common/entities/base.entity';
 import { MenuItem } from 'src/modules/menu-item/entities/menu-item.entity';
 import { Order } from 'src/modules/order/entities/order.entity';
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, ManyToOne } from 'typeorm';
 
 export enum OrderItemStatus {
   Queued = 'queued',
@@ -12,11 +13,7 @@ export enum OrderItemStatus {
 
 @ObjectType()
 @Entity()
-export class OrderItem {
-  @Field(() => ID)
-  @PrimaryGeneratedColumn()
-  id: number;
-
+export class OrderItem extends BaseEntity {
   @Field(() => Order)
   @ManyToOne(() => Order, (order) => order.items)
   order: Order;

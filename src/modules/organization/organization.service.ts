@@ -44,7 +44,7 @@ export class OrganizationService {
       throw new Error('Organization does not exist');
     }
 
-    Object.assign(organization, { isActive: false });
+    Object.assign(organization, { archived: false });
 
     await this.organizationRepository.save(organization);
 
