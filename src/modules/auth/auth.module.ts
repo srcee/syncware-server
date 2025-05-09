@@ -11,6 +11,8 @@ import { APP_GUARD } from '@nestjs/core';
 import { JwtAuthGuard } from './guards/jwt-auth.guard';
 import { LocalAuthGuard } from './guards/local-auth.guard';
 import { LocalStrategy } from './strategies/local.strategy';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { User } from '../../common/entities/user.entity';
 
 @Module({
   imports: [
@@ -24,6 +26,7 @@ import { LocalStrategy } from './strategies/local.strategy';
         signOptions: { expiresIn: configService.get<string>('JWT_EXPIRES_IN') },
       }),
     }),
+    TypeOrmModule.forFeature([User]),
   ],
   providers: [
     AuthResolver,

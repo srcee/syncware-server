@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { User } from './entities/user.entity';
+import { User } from '../../common/entities/user.entity';
 import { UpdateUserInput } from './dto/update-user.input';
 import { CreateUserInput } from './dto/create-user.input';
 import { PasswordService } from 'src/modules/password/password.service';
@@ -15,7 +15,10 @@ export class UserService {
   ) {}
 
   async findOne(id: number): Promise<User | null> {
-    return this.userRepository.findOne({ where: { id } });
+    return this.userRepository.findOne({
+      where: { id },
+      relations: ['updatedBy'],
+    });
   }
 
   async findOneByUserName(username: string): Promise<User | null> {
@@ -39,7 +42,7 @@ export class UserService {
       return null;
     }
 
-    const userData: User = { ...user, ...restInput };
+    const userData = this.userRepository.create({ ...user, ...restInput });
 
     if (password) {
       const passwordHash = await this.passwordService.hashPassword(password);
@@ -56,7 +59,7 @@ export class UserService {
       throw new Error('user does not exist');
     }
 
-    await this.userRepository.save({ ...user, isActive: false });
+    await this.userRepository.save({ ...user, archived: false });
 
     return true;
   }

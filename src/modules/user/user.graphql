@@ -4,6 +4,11 @@ type User {
   username: String
   role: UserRole
   restaurant: Restaurant
+  archived: Boolean
+  createdAt: Date
+  updatedAt: Date
+  createdBy: User
+  updatedBy: User
 }
 
 input CreateUserInput {

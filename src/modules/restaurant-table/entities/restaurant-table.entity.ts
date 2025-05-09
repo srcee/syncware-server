@@ -1,6 +1,7 @@
-import { Field, ID, ObjectType } from '@nestjs/graphql';
+import { Field, ObjectType } from '@nestjs/graphql';
+import { BaseEntity } from 'src/common/entities/base.entity';
 import { Restaurant } from 'src/modules/restaurant/entities/restaurant.entity';
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, ManyToOne } from 'typeorm';
 
 export enum RestaurantTableStatus {
   Available = 'available',
@@ -10,11 +11,7 @@ export enum RestaurantTableStatus {
 
 @ObjectType()
 @Entity()
-export class RestaurantTable {
-  @Field(() => ID)
-  @PrimaryGeneratedColumn()
-  id: number;
-
+export class RestaurantTable extends BaseEntity {
   @Field()
   @Column()
   tableName: string;

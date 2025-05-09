@@ -2,17 +2,15 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { AppClusterService } from './core/appCluster.service';
 import { EnvironmentInfo } from './core/environmentInfo.service';
-import { GlobalErrorFilter } from './core/globalError.filter';
 import { LoggerService } from './core/logger.service';
 import * as dotenv from 'dotenv';
+import { RequestContextInterceptor } from './common/interceptors/request-context.interceptor';
 dotenv.config();
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  const logger = app.get(LoggerService);
 
-  app.useGlobalFilters(new GlobalErrorFilter(logger));
-  app.setGlobalPrefix('api');
+  app.useGlobalInterceptors(new RequestContextInterceptor());
 
   app.enableCors({
     origin: '*',

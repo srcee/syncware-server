@@ -4,7 +4,11 @@ type Order {
   waiter: User
   items: [OrderItem]
   status: OrderStatus
+  archived: Boolean
   createdAt: Date
+  updatedAt: Date
+  createdBy: User
+  updatedBy: User
 }
 
 enum OrderStatus {

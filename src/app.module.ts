@@ -1,10 +1,11 @@
 import { join } from 'path';
+import * as Joi from 'joi';
 import { Module } from '@nestjs/common';
+import { ConfigModule, ConfigService } from '@nestjs/config';
+import { TypeOrmModule } from '@nestjs/typeorm';
 import { GraphQLISODateTime, GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
-import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserModule } from './modules/user/user.module';
-import { ConfigModule, ConfigService } from '@nestjs/config';
 import { OrganizationModule } from './modules/organization/organization.module';
 import { RestaurantModule } from './modules/restaurant/restaurant.module';
 import { RestaurantTableModule } from './modules/restaurant-table/restaurant-table.module';
@@ -14,8 +15,10 @@ import { MenuItemModule } from './modules/menu-item/menu-item.module';
 import { MenuCategoryModule } from './modules/menu-category/menu-category.module';
 import { PasswordModule } from './modules/password/password.module';
 import { AuthModule } from './modules/auth/auth.module';
-import * as Joi from 'joi';
 import { CoreModule } from './core/core.module';
+import { User } from './common/entities/user.entity';
+import { RequestContext } from './common/context/request-context.service';
+import { AuditSubscriber } from './common/subscribers/audit.subscriber';
 
 const validationSchema = Joi.object({
   JWT_SECRET: Joi.string().min(9).required(),
@@ -40,7 +43,10 @@ const validationSchema = Joi.object({
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       typePaths: ['./src/**/*.graphql'],
-      context: ({ req }: { req: Request }) => ({ req }),
+      context: ({ req }: { req: Request & { user: User } }) => {
+        const user = req.user;
+        return RequestContext.run(user, () => ({ req, user }));
+      },
       definitions: {
         path: join(process.cwd(), 'src/graphql/graphql.ts'),
       },
@@ -59,6 +65,7 @@ const validationSchema = Joi.object({
         migrations: [__dirname + '/../migrations/*.{ts,js}'],
         autoLoadEntities: true,
         synchronize: false,
+        subscribers: [AuditSubscriber],
       }),
       inject: [ConfigService],
     }),

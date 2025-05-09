@@ -4,6 +4,11 @@ type RestaurantTable {
   seats: Int
   status: RestaurantTableStatus
   restaurant: Restaurant
+  archived: Boolean
+  createdAt: Date
+  updatedAt: Date
+  createdBy: User
+  updatedBy: User
 }
 
 enum RestaurantTableStatus {

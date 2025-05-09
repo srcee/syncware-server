@@ -119,7 +119,6 @@ export interface CreateOrganizationInput {
 
 export interface UpdateOrganizationInput {
     name?: Nullable<string>;
-    isActive?: Nullable<boolean>;
     restaurantIds?: Nullable<Nullable<number>[]>;
 }
 
@@ -221,6 +220,11 @@ export interface MenuCategory {
     name: string;
     items?: Nullable<Nullable<MenuItem>[]>;
     restaurant?: Nullable<Restaurant>;
+    archived?: Nullable<boolean>;
+    createdAt?: Nullable<Date>;
+    updatedAt?: Nullable<Date>;
+    createdBy?: Nullable<User>;
+    updatedBy?: Nullable<User>;
 }
 
 export interface MenuItem {
@@ -231,6 +235,11 @@ export interface MenuItem {
     categoryId?: Nullable<number>;
     isAvailable?: Nullable<boolean>;
     preparationArea?: Nullable<MenuItemPreparationArea>;
+    archived?: Nullable<boolean>;
+    createdAt?: Nullable<Date>;
+    updatedAt?: Nullable<Date>;
+    createdBy?: Nullable<User>;
+    updatedBy?: Nullable<User>;
 }
 
 export interface OrderItem {
@@ -240,6 +249,11 @@ export interface OrderItem {
     quantity?: Nullable<number>;
     notes?: Nullable<string>;
     status?: Nullable<OrderItemStatus>;
+    archived?: Nullable<boolean>;
+    createdAt?: Nullable<Date>;
+    updatedAt?: Nullable<Date>;
+    createdBy?: Nullable<User>;
+    updatedBy?: Nullable<User>;
 }
 
 export interface Order {
@@ -248,14 +262,22 @@ export interface Order {
     waiter?: Nullable<User>;
     items?: Nullable<Nullable<OrderItem>[]>;
     status?: Nullable<OrderStatus>;
+    archived?: Nullable<boolean>;
     createdAt?: Nullable<Date>;
+    updatedAt?: Nullable<Date>;
+    createdBy?: Nullable<User>;
+    updatedBy?: Nullable<User>;
 }
 
 export interface Organization {
     id?: Nullable<number>;
     name?: Nullable<string>;
     restaurants?: Nullable<Nullable<Restaurant>[]>;
-    isActive?: Nullable<boolean>;
+    archived?: Nullable<boolean>;
+    createdAt?: Nullable<Date>;
+    updatedAt?: Nullable<Date>;
+    createdBy?: Nullable<User>;
+    updatedBy?: Nullable<User>;
 }
 
 export interface RestaurantTable {
@@ -264,6 +286,11 @@ export interface RestaurantTable {
     seats?: Nullable<number>;
     status?: Nullable<RestaurantTableStatus>;
     restaurant?: Nullable<Restaurant>;
+    archived?: Nullable<boolean>;
+    createdAt?: Nullable<Date>;
+    updatedAt?: Nullable<Date>;
+    createdBy?: Nullable<User>;
+    updatedBy?: Nullable<User>;
 }
 
 export interface Restaurant {
@@ -273,6 +300,11 @@ export interface Restaurant {
     organization?: Nullable<Organization>;
     users?: Nullable<Nullable<User>[]>;
     tables?: Nullable<Nullable<RestaurantTable>[]>;
+    archived?: Nullable<boolean>;
+    createdAt?: Nullable<Date>;
+    updatedAt?: Nullable<Date>;
+    createdBy?: Nullable<User>;
+    updatedBy?: Nullable<User>;
 }
 
 export interface User {
@@ -281,6 +313,11 @@ export interface User {
     username?: Nullable<string>;
     role?: Nullable<UserRole>;
     restaurant?: Nullable<Restaurant>;
+    archived?: Nullable<boolean>;
+    createdAt?: Nullable<Date>;
+    updatedAt?: Nullable<Date>;
+    createdBy?: Nullable<User>;
+    updatedBy?: Nullable<User>;
 }
 
 type Nullable<T> = T | null;

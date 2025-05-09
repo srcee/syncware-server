@@ -1,22 +1,13 @@
-import { Field, ID, ObjectType } from '@nestjs/graphql';
+import { Field, ObjectType } from '@nestjs/graphql';
+import { BaseEntity } from 'src/common/entities/base.entity';
 import { Organization } from 'src/modules/organization/entities/organization.entity';
 import { RestaurantTable } from 'src/modules/restaurant-table/entities/restaurant-table.entity';
-import { User } from 'src/modules/user/entities/user.entity';
-import {
-  Column,
-  Entity,
-  ManyToOne,
-  OneToMany,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
+import { User } from 'src/common/entities/user.entity';
+import { Column, Entity, ManyToOne, OneToMany } from 'typeorm';
 
 @ObjectType()
 @Entity()
-export class Restaurant {
-  @Field(() => ID)
-  @PrimaryGeneratedColumn()
-  id: number;
-
+export class Restaurant extends BaseEntity {
   @Field()
   @Column()
   name: string;
