@@ -4,13 +4,10 @@ import { AppClusterService } from './core/appCluster.service';
 import { EnvironmentInfo } from './core/environmentInfo.service';
 import { LoggerService } from './core/logger.service';
 import * as dotenv from 'dotenv';
-import { RequestContextInterceptor } from './common/interceptors/request-context.interceptor';
 dotenv.config();
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-
-  app.useGlobalInterceptors(new RequestContextInterceptor());
 
   app.enableCors({
     origin: '*',
