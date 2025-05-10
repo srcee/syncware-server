@@ -7,12 +7,13 @@ import { AuthResolver } from './auth.resolver';
 import { UserModule } from '../user/user.module';
 import { PasswordModule } from '../password/password.module';
 import { JwtStrategy } from './strategies/jwt.strategy';
-import { APP_GUARD } from '@nestjs/core';
-import { JwtAuthGuard } from './guards/jwt-auth.guard';
-import { LocalAuthGuard } from './guards/local-auth.guard';
+import { LocalAuthGuard } from '../../common/guards/local-auth.guard';
 import { LocalStrategy } from './strategies/local.strategy';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from '../../common/entities/user.entity';
+import { JwtAuthGuard } from 'src/common/guards/jwt-auth.guard';
+import { APP_GUARD } from '@nestjs/core';
+import { RolesGuard } from 'src/common/guards/roles.guard';
 
 @Module({
   imports: [
@@ -37,6 +38,10 @@ import { User } from '../../common/entities/user.entity';
     {
       provide: APP_GUARD,
       useClass: JwtAuthGuard,
+    },
+    {
+      provide: APP_GUARD,
+      useClass: RolesGuard,
     },
   ],
   exports: [AuthService],
