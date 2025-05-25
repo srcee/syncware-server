@@ -4,7 +4,7 @@ import { UseGuards } from '@nestjs/common';
 import { LocalAuthGuard } from '../../common/guards/local-auth.guard';
 import { Public } from '../../common/decorators/public.decorator';
 import { LoginResponse } from './dto/login.response';
-import { AuthenticatedRequest } from 'src/common/types/authenticated-request.interface';
+import { AuthenticatedRequest } from '../../common/types/authenticated-request.interface';
 import { User } from '../../common/entities/user.entity';
 
 export interface GqlContext {

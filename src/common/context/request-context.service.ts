@@ -1,5 +1,5 @@
 import { AsyncLocalStorage } from 'async_hooks';
-import { User } from 'src/common/entities/user.entity';
+import { User } from '../entities/user.entity';
 
 type Store = { user: User };
 

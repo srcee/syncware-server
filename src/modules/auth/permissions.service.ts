@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { User, UserRole } from 'src/common/entities/user.entity';
+import { User, UserRole } from '../../common/entities/user.entity';
 
 @Injectable()
 export class PermissionsService {

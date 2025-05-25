@@ -10,7 +10,7 @@ import {
   JoinColumn,
 } from 'typeorm';
 import { RequestContext } from '../context/request-context.service';
-import { User } from 'src/common/entities/user.entity';
+import { User } from './user.entity';
 
 export abstract class BaseEntity {
   @Field(() => ID)

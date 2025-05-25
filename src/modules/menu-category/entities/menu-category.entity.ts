@@ -1,8 +1,8 @@
-import { Field, ObjectType } from '@nestjs/graphql';
-import { BaseEntity } from 'src/common/entities/base.entity';
-import { MenuItem } from 'src/modules/menu-item/entities/menu-item.entity';
-import { Restaurant } from 'src/modules/restaurant/entities/restaurant.entity';
 import { Column, Entity, ManyToOne, OneToMany } from 'typeorm';
+import { Field, ObjectType } from '@nestjs/graphql';
+import { BaseEntity } from '../../../common/entities/base.entity';
+import { MenuItem } from '../../menu-item/entities/menu-item.entity';
+import { Restaurant } from '../../restaurant/entities/restaurant.entity';
 
 @ObjectType()
 @Entity()

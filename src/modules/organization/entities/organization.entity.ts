@@ -1,7 +1,7 @@
-import { Field, ObjectType } from '@nestjs/graphql';
-import { BaseEntity } from 'src/common/entities/base.entity';
-import { Restaurant } from 'src/modules/restaurant/entities/restaurant.entity';
 import { Entity, OneToMany, Column } from 'typeorm';
+import { Field, ObjectType } from '@nestjs/graphql';
+import { BaseEntity } from '../../../common/entities/base.entity';
+import { Restaurant } from '../../../modules/restaurant/entities/restaurant.entity';
 
 @ObjectType()
 @Entity()
