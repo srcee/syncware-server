@@ -1,7 +1,7 @@
 import { ExecutionContext, Injectable } from '@nestjs/common';
 import { GqlExecutionContext } from '@nestjs/graphql';
 import { AuthGuard } from '@nestjs/passport';
-import { AuthenticatedRequest } from 'src/common/types/authenticated-request.interface';
+import { AuthenticatedRequest } from '../../common/types/authenticated-request.interface';
 
 interface GraphQLLoginBody {
   variables?: {

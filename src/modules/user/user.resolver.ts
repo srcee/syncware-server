@@ -3,7 +3,7 @@ import { UserService } from './user.service';
 import { User, UserRole } from '../../common/entities/user.entity';
 import { CreateUserInput } from './dto/create-user.input';
 import { UpdateUserInput } from './dto/update-user.input';
-import { Roles } from 'src/common/decorators/roles.decorator';
+import { Roles } from '../../common/decorators/roles.decorator';
 
 @Resolver('User')
 export class UserResolver {

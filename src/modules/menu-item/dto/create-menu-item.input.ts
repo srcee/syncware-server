@@ -1,5 +1,5 @@
 import { Field, InputType, Int, Float } from '@nestjs/graphql';
-import { MenuItemPreparationArea } from 'src/graphql/graphql';
+import { MenuItemPreparationArea } from '../../../graphql/graphql';
 
 @InputType()
 export class CreateMenuItemInput {

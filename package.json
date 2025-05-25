@@ -10,6 +10,7 @@
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "npx nest start",
     "start:docker": "docker-compose up --build",
+    "start:docker:dev": "docker-compose -f docker-compose.dev.yml up --build",
     "start:debug": "npx nest start --debug --watch",
     "start:dev": "npx nest start --watch",
     "start:prod": "node dist/main",

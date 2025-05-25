@@ -1,6 +1,6 @@
 import { Field, ObjectType } from '@nestjs/graphql';
-import { BaseEntity } from 'src/common/entities/base.entity';
-import { Restaurant } from 'src/modules/restaurant/entities/restaurant.entity';
+import { BaseEntity } from './base.entity';
+import { Restaurant } from '../../modules/restaurant/entities/restaurant.entity';
 import { Column, Entity, ManyToOne } from 'typeorm';
 
 export enum UserRole {

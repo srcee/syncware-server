@@ -4,7 +4,7 @@ import { Repository } from 'typeorm';
 import { User } from '../../common/entities/user.entity';
 import { UpdateUserInput } from './dto/update-user.input';
 import { CreateUserInput } from './dto/create-user.input';
-import { PasswordService } from 'src/modules/password/password.service';
+import { PasswordService } from '../password/password.service';
 
 @Injectable()
 export class UserService {

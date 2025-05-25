@@ -1,8 +1,9 @@
 # Stage 1: Build
-FROM node:20-alpine as builder
+FROM node:20-alpine AS builder
 WORKDIR /app
+
 COPY package*.json ./
-RUN npm install
+RUN npm ci
 COPY . .
 RUN npm run build
 
@@ -10,11 +11,16 @@ RUN npm run build
 FROM node:20-alpine
 WORKDIR /app
 
-COPY --from=builder /app/dist ./dist
-COPY --from=builder /app/package*.json ./
-COPY --from=builder /app/init-db.sh ./
-COPY --from=builder /app/node_modules ./node_modules
+# Install only prod dependencies
+COPY package*.json ./
+RUN npm ci --omit=dev
 
+# Copy built files from builder
+COPY --from=builder /app/dist ./dist
+COPY --from=builder /app/init-db.sh ./
+
+# Ensure script is executable
 RUN chmod +x init-db.sh
 
-CMD ["sh", "init-db.sh"]
+# Start the compiled JS app
+CMD ["node", "dist/main.js"]

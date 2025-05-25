@@ -4,8 +4,8 @@ import {
   InsertEvent,
   UpdateEvent,
 } from 'typeorm';
-import { BaseEntity } from 'src/common/entities/base.entity';
-import { RequestContext } from 'src/common/context/request-context.service';
+import { BaseEntity } from '../../common/entities/base.entity';
+import { RequestContext } from '../../common/context/request-context.service';
 
 @EventSubscriber()
 export class AuditSubscriber implements EntitySubscriberInterface<BaseEntity> {

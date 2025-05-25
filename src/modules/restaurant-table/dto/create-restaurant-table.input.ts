@@ -1,5 +1,5 @@
 import { Field, ID, InputType } from '@nestjs/graphql';
-import { RestaurantTableStatus } from 'src/modules/restaurant-table/entities/restaurant-table.entity';
+import { RestaurantTableStatus } from '../../restaurant-table/entities/restaurant-table.entity';
 
 @InputType()
 export class CreateRestaurantTableInput {
