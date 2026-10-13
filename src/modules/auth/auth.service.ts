@@ -5,40 +5,29 @@ import { User } from '../../common/entities/user.entity';
 import { JwtService } from '@nestjs/jwt';
 import { JwtPayload } from './strategies/jwt.strategy';
 import { LoginResponse } from './dto/login.response';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
 
 @Injectable()
 export class AuthService {
   constructor(
-    @InjectRepository(User)
-    private readonly userRepository: Repository<User>,
     private userService: UserService,
     private passwordService: PasswordService,
     private jwtService: JwtService,
   ) {}
 
-  async validateUser(
-    username: string,
-    password: string,
-  ): Promise<Omit<User, 'passwordHash'> | null> {
-    const user = await this.userService.findOneByUserName(username);
+  async validateUser(username: string, password: string): Promise<User | null> {
+    const authUser = await this.userService.findOneForAuthByUserName(username);
+    const hashToCompare =
+      authUser?.passwordHash ?? this.passwordService.dummyHash;
+    const isPasswordCorrect = await this.passwordService.comparePasswords(
+      password,
+      hashToCompare,
+    );
 
-    if (user) {
-      // Remove passwordHash and return a User instance
-      const { passwordHash, ...userWithoutPassword } = user;
-
-      const isPasswordCorrect = await this.passwordService.comparePasswords(
-        password,
-        passwordHash,
-      );
-
-      if (isPasswordCorrect) {
-        return this.userRepository.create(userWithoutPassword);
-      }
+    if (!authUser || !isPasswordCorrect) {
+      return null;
     }
 
-    return null;
+    return this.userService.findOne(authUser.id);
   }
 
   login(user: User): LoginResponse {

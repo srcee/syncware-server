@@ -15,6 +15,7 @@ export class UserResolver {
     return this.userService.findOne(id);
   }
 
+  @Roles(UserRole.Admin)
   @Mutation(() => User)
   createUser(
     @Args('createUserInput')
@@ -23,6 +24,7 @@ export class UserResolver {
     return this.userService.create(createUserInput);
   }
 
+  @Roles(UserRole.Admin)
   @Mutation(() => User)
   updateUser(
     @Args('updateUserInput')
@@ -31,6 +33,7 @@ export class UserResolver {
     return this.userService.update(updateUserInput);
   }
 
+  @Roles(UserRole.Admin)
   @Mutation(() => Boolean)
   async deleteUser(@Args('id') id: number) {
     return await this.userService.delete(id);

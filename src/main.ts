@@ -1,4 +1,5 @@
 import { NestFactory } from '@nestjs/core';
+import { ValidationPipe } from '@nestjs/common';
 import { AppModule } from './app.module';
 import { AppClusterService } from './core/appCluster.service';
 import { EnvironmentInfo } from './core/environmentInfo.service';
@@ -9,8 +10,19 @@ dotenv.config();
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
+  app.useGlobalPipes(
+    new ValidationPipe({
+      transform: true,
+      whitelist: true,
+    }),
+  );
+
   app.enableCors({
-    origin: '*',
+    origin: (process.env.CORS_ORIGINS || 'http://localhost:3000')
+      .split(',')
+      .map((origin) => origin.trim())
+      .filter(Boolean),
+    credentials: false,
     allowedHeaders: [
       // default
       'Accept',
@@ -25,8 +37,7 @@ async function bootstrap() {
 }
 
 async function startApp() {
-  const app = await NestFactory.create(AppModule);
-  const logger = app.get(LoggerService);
+  const logger = new LoggerService();
 
   if (EnvironmentInfo.isProductionZone) {
     AppClusterService.clusterize(bootstrap, logger);
