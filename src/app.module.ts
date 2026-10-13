@@ -21,9 +21,11 @@ import { RequestContext } from './common/context/request-context.service';
 import { AuditSubscriber } from './common/subscribers/audit.subscriber';
 
 const validationSchema = Joi.object({
-  JWT_SECRET: Joi.string().min(9).required(),
+  JWT_SECRET: Joi.string().min(32).required(),
   JWT_EXPIRES_IN: Joi.string().required(),
-  HASH_ROUNDS: Joi.number().default(10),
+  ARGON2_MEMORY_COST: Joi.number().default(65536),
+  ARGON2_TIME_COST: Joi.number().default(3),
+  ARGON2_PARALLELISM: Joi.number().default(1),
   POSTGRES_HOST: Joi.string().required(),
   POSTGRES_PORT: Joi.number().default(5432),
   POSTGRES_USER: Joi.string().required(),
